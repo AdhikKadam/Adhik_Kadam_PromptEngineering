@@ -1,7 +1,7 @@
 # Prompt Engineering Portfolio
 Name: Adhik Kadam
 Date: 6-Jun-2026
-LLM Used: Gemini Pro
+LLM Used: Gemini Pro and Gemini non-reasoning flash
 
 ## Part 1: Prompt Design & Iteration
 ### 1.1 Scenario A: Technical Explanation
@@ -29,6 +29,7 @@ Here is a brief breakdown of how it works:
 The way blocks are linked makes the system incredibly secure. If a hacker tries to tamper with the data in one block, its hash changes. Because the next block still contains the *old* hash, the chain breaks, and the network instantly knows someone is trying to cheat the system.
 
 Because of this, blockchain allows people to securely share data and trade digital assets (like cryptocurrencies) directly with one another, without needing a "middleman" like a bank or a government to verify it.
+
 ---
 **Refined Prompt (V2)**
 Explain blockchain in easy words for 10 year old in less  than 100 words
@@ -37,9 +38,10 @@ Explain blockchain in easy words for 10 year old in less  than 100 words
 
 Imagine you and your friends share a magic digital notebook. When someone makes a trade, it is written in everyone's notebook at the exact same time.
 
-The magic part? Once a page is full, it gets locked tightly into a "block." No one can erase or change it, ever. All these locked blocks link together to form a "chain."
+The magic part? Once a page is full, it gets locked tightly into a "block." No one can erase or change it, ever. All these locked blocks link together to form a "chain." 
 
 Because everyone has the exact same copy and no one can cheat, it is incredibly safe! People use this magic notebook to trade digital money securely without needing a bank.
+
 ---
 **Final Prompt (v3)**
 
@@ -280,8 +282,8 @@ Here are 3 catchy tagline options that bridge India's ancient clay-cooling herit
 | Version | Prompt | What Changed | Why This Improved the Output |
 |---------|--------|--------------|-------------------------------|
 | V1 | What is blockchain explain in brief? | N/A | N/A |
-| V2 | "Explain what a neural network is to a 10-year-old. Use simple words and a fun analogy." | Added target audience (10-year-old) and requested an analogy | Forced the LLM to simplify language and use relatable comparison instead of technical jargon |
-| V3 | Added role ("fun and patient teacher"), specific analogy domain (sport/cooking/friends), word limit, and emotional tone ("make it exciting") | Added role assignment, word limit, and more specific creative constraints | The role gave the LLM a consistent persona; the word limit ensured conciseness; specifying analogy domains grounded the output in familiar childhood experiences |
+| V2 | Explain blockchain in easy words for 10 year old in less  than 100 words | Provided context infomation of consumer  | Avoiding technical jargon with easy language |
+ | V3 | Explain blockchain technology in easy words for 10 year old in less than 200 words along with easy day to day life example and 3 advantages of this technology | Forced the LLM to simplify language and use relatable comparison instead of technical jargon in less words | Relateable real life example with key advantages about technology |
 
 ---
 
@@ -289,9 +291,9 @@ Here are 3 catchy tagline options that bridge India's ancient clay-cooling herit
 
 | Version | Prompt | What Changed | Why This Improved the Output |
 |---------|--------|--------------|-------------------------------|
-| V1 | "Write an email declining a job offer." | N/A | N/A |
-| V2 | Added tone guidance (warm, appreciative), goal of maintaining future interest, and professional framing | Added specific tone and outcome goals | The LLM produced a fuller, kinder email with forward-looking language, rather than a terse one-paragraph note |
-| V3 | Added role (career coach), specific company type (tech startup), four explicit goals numbered out, and instruction to avoid stiff/corporate tone | Added role, specific context (software engineering/startup), and explicitly listed all desired elements | Breaking down the goals as a numbered list ensured no element was overlooked; the "human, not corporate" instruction produced a distinctly warmer, more personal voice |
+| V1 | Write email for declining job offer | N/A | N/A |
+| V2 | Draft an email declining a job offer politely while expressing continued interest in the company | Added specific tone and outcome goals | The LLM produced a fuller, kinder email with forward-looking language with fine tuned options |
+| V3 | I got a job offer from the company, however after resignation my current employer accepted and addressed my concerns behind quitting the job. Now project I am working in current organization is my area of interest and expertise which I wanted to continued. My dilemma is rejecting new offer will lose my future opportunities, so help me draft email to decline the offer politely keeping my door open for future opportunities. Give me one single option with less than 300 characters which includes my sincere thanks for considering my candidature | Added specific context and situations | Clear and concise output with professional approach  |
 
 ---
 
@@ -299,23 +301,252 @@ Here are 3 catchy tagline options that bridge India's ancient clay-cooling herit
 
 | Version | Prompt | What Changed | Why This Improved the Output |
 |---------|--------|--------------|-------------------------------|
-| V1 | "Write a marketing tagline for an eco-friendly water bottle." | N/A | N/A |
-| V2 | Requested 5 taglines, specified target demographic (ages 18–30, environmentally conscious) | Increased quantity and added audience specification | Multiple options gave creative range; audience specificity steered toward more youthful, energetic language |
-| V3 | Added copywriter role, brand name (Ripple), brand mission (clean water funding), exact audience psychographics, 8-word limit, and explicit instruction to avoid clichés | Added expert role, rich brand context, length constraint, and negative examples of what to avoid | The brand story gave the LLM enough context to write taglines with emotional depth (personal + global benefit); banning clichés pushed toward more original phrasing |
+| V1 | Generate a creative marketing tagline for a new eco-friendly water bottle brand | N/A | N/A |
+| V2 | Generate a creative marketing tagline for a new eco-friendly water bottle brand built using soil with ancient technique to keep water cool | Highlighted USP via Context Setting | Context setting allowed LLM to be creative with thinking |
+| V3 | Generate a creative marketing tagline for a new eco-friendly water bottle brand built using soil with ancient technique to keep water cool. This is keeping sustainable lifestyle in mind avoiding plastic and toxic waste highlighting indian traditional culture. Give me 3 catchy options only. | Added kind of role and purpose of the product is introducing in market | Both context and future role of the product helped build clear tagline covering all aspectes |
 
 ---
 
 ### 1.3 Role and Context Analysis
 
+
 ## Part 2: Temperature & Parameter Control
+
 ### 2.1 Temperature Experimentation
+
+**Chosen Task:** 
+
+Writing a product description for a laptop. 
+
+Prompt Used: Write a brief product description for a new high-end gaming laptop called the 'Nebula X1'.
+
+#### **Test 1: Low Temperature (Simulated 0.2)**
+
+**Expected Behavior:** Deterministic, focused, and factual.
+
+**Output:** > "The Nebula X1 is a high-end gaming laptop designed for performance. It features a 16-inch display with a high refresh rate, a next-generation processor, and a dedicated graphics card. The chassis is constructed from durable aluminum and includes a standard backlit RGB keyboard. This laptop provides the necessary hardware specifications to run modern video games efficiently."
+
+#### **Test 2: Medium Temperature (Simulated 0.7)**
+
+**Expected Behavior:** Balanced mix of creativity and coherence.
+
+**Output:** > "Elevate your gaming experience with the all-new Nebula X1. Engineered for uncompromising performance, this powerhouse features a stunning 16-inch display with ultra-fast refresh rates to keep you ahead of the competition. Whether you are dominating the esports arena or exploring vast open worlds, the Nebula X1 delivers smooth, lag-free gameplay, all housed in a sleek, premium aluminum chassis."
+
+#### **Test 3: High Temperature (Simulated 1.2)**
+
+**Expected Behavior:** Creative, random, diverse, and unpredictable.
+
+**Output:** > "Ignite your digital cosmos with the Nebula X1! This isn't just a gaming laptop; it's a portable supernova forging galaxies of pixels at mind-bending speeds. Wield the crystalline power of its luminous 16-inch dreamscape display, and let the neon-infused aluminum chassis whisper the ancient secrets of the gaming gods while you conquer uncharted cybernetic realms. Unleash the beast!"
+
+---
+
+#### **Comparison Table**
+
+| Temperature Setting | Tone & Style | Vocabulary & Phrasing | Primary Focus |
+| --- | --- | --- | --- |
+| **Low (0.2)** | Dry, objective, mechanical | Standard, literal ("hardware specifications," "efficiently") | Stating the raw facts and physical features. |
+| **Medium (0.7)** | Engaging, persuasive, professional | Marketing-friendly ("uncompromising performance," "sleek") | Selling the product by linking features to user benefits. |
+| **High (1.2)** | Highly emotional, eccentric, dramatic | Metaphorical, vivid ("digital cosmos," "portable supernova") | Creating an intense, imaginative vibe and emotional response. |
+
+---
+
 ### 2.2 Analysis & Recommendations
 
+Low temperature settings are ideal for tasks requiring high precision and factual accuracy, such as generating functional programming code or extracting specific data for technical and legal documentation. Conversely, high temperature settings excel in scenarios where novelty and out-of-the-box thinking are necessary, like brainstorming creative writing prompts or writing abstract poetry. For this specific laptop product description task, the medium temperature (0.7) worked best. It provided the optimal balance, ensuring the copy was engaging and persuasive enough to attract buyers without sounding entirely unhinged or losing sight of the core product features.
+
 ## Part 3: Strategic Prompting Techniques
+
 ### 3.1 Chain-of-Thought Prompting
+
+#### Selected Problem: Option B – Multi-Step Reasoning
+
+**Problem:**
+A company has 150 employees. 60% work in engineering, 25% in sales, and the rest in operations. If the company plans to hire 20% more engineers and 10% more sales people, how many total employees will there be after hiring?
+
+---
+
+
+#### 3.1.1 Without Chain-of-Thought
+
+**Prompt Used:**
+
+
+A company has 150 employees. 60% work in engineering, 25% in sales, and the rest in operations. If the company plans to hire 20% more engineers and 10% more sales people, how many total employees will there be after hiring? Give only the final answer.
+
+
+**LLM Output:**
+
+
+171
+
+
+---
+
+#### 3.1.2 With Chain-of-Thought
+
+**Prompt Used:**
+
+
+A company has 150 employees. 60% work in engineering, 25% in sales, and the rest in operations. If the company plans to hire 20% more engineers and 10% more sales people, how many total employees will there be after hiring?
+
+Let's solve this step by step. Show your reasoning clearly, then give the final answer.
+
+
+**LLM Output (summarized):**
+
+* Calculated engineering employees: 90
+* Calculated sales employees: 37.5
+* Calculated operations employees: 22.5
+* Calculated new engineering hires: 18
+* Calculated new sales hires: 3.75
+* Total new hires: 21.75
+* Final employee count: 171.75
+
+**Final Answer Produced by the Model:**
+
+
+171.75 employees
+
+
+---
+
+#### 3.1.3 Comparison
+
+The two outputs differed significantly. The prompt without chain-of-thought produced only the final answer (171), while the chain-of-thought prompt showed all intermediate calculations and reasoning steps. Chain-of-thought prompting helps with complex reasoning because it breaks a problem into smaller steps, making the model's decision process transparent and easier to verify. However, a limitation observed is that detailed reasoning does not guarantee correctness; in this case, the model introduced fractional employees and arrived at a different final answer than the direct-response version, highlighting how assumptions made during reasoning can affect the outcome.
+
+
 ### 3.2 Few-Shot Prompting
 
+#### Step 1: Zero-Shot Attempt
+
+**Prompt Used:**
+
+
+Classify each customer review as Positive, Negative, or Neutral. Respond with only the label for each review.
+
+1. "The product arrived damaged and customer service was unhelpful."
+2. "Works as expected, nothing special but does the job."
+3. "Absolutely love this! Best purchase I've made all year!"
+4. "The quality is okay but slightly overpriced for what you get."
+5. "Terrible experience, would not recommend to anyone."
+
+
+**Results:**
+
+| Review # | Classification |
+| -------- | -------------- |
+| 1        | Negative       |
+| 2        | Neutral        |
+| 3        | Positive       |
+| 4        | Neutral        |
+| 5        | Negative       |
+
+---
+
+#### Step 2: Few-Shot Attempt
+
+**Prompt Used:**
+
+
+Classify each customer review as Positive, Negative, or Neutral. Use the examples below as guidance.
+
+Review: "This product exceeded my expectations!"
+Sentiment: Positive
+
+Review: "Completely broke after one week of use."
+Sentiment: Negative
+
+Review: "It's fine, does what it says on the box."
+Sentiment: Neutral
+
+Review: "Amazing value and excellent quality."
+Sentiment: Positive
+
+Review: "It stopped working almost immediately."
+Sentiment: Negative
+
+Now classify these reviews:
+
+1. "The product arrived damaged and customer service was unhelpful."
+2. "Works as expected, nothing special but does the job."
+3. "Absolutely love this! Best purchase I've made all year!"
+4. "The quality is okay but slightly overpriced for what you get."
+5. "Terrible experience, would not recommend to anyone."
+
+
+**Results:**
+
+| Review # | Classification |
+| -------- | -------------- |
+| 1        | Negative       |
+| 2        | Neutral        |
+| 3        | Positive       |
+| 4        | Neutral        |
+| 5        | Negative       |
+
+---
+
+#### Step 3: Analysis
+
+**Comparison Table**
+
+| Review # | Zero-Shot Result | Few-Shot Result | Correct Label | Improved? |
+| -------- | ---------------- | --------------- | ------------- | --------- |
+| 1        | Negative         | Negative        | Negative      | No        |
+| 2        | Neutral          | Neutral         | Neutral       | No        |
+| 3        | Positive         | Positive        | Positive      | No        |
+| 4        | Neutral          | Neutral         | Neutral       | No        |
+| 5        | Negative         | Negative        | Negative      | No        |
+
+#### When Few-shot prompting is most useful  
+
+In this experiment, the zero-shot and few-shot prompts produced identical classifications for all five reviews. This suggests that the sentiment classification task was straightforward enough that the model could correctly infer the labels without needing examples. Few-shot prompting is most useful when tasks are more ambiguous, require a specific output format, or involve domain-specific language where examples help establish the desired pattern and decision criteria.
+
+
 ## Part 4: Responsible AI & Limitations
+
 ### 4.1 Testing for Hallucinations
+
+**Initial Prompt:**
+"What were the main conclusions of Dr. Eobard Thawne's 2025 landmark study on 'hyper-resonant quartz computing?"
+
+**The LLM's Response:**
+ The LLM stated that there is no real 2025 landmark study on this topic. It correctly identified "Eobard Thawne" as a fictional DC Comics character (Reverse-Flash) and stated it found no credible scientific papers on "hyper-resonant quartz computing." It offered possibilities for the mix-up and asked for further citations to investigate.
+
+**Did it hallucinate or admit uncertainty?**
+It did **not** hallucinate. Instead of making up fake conclusions, it fact-checked the prompt, correctly identified the fake/fictional elements, and admitted that the study did not exist.
+
+**Rephrased Prompt:**
+"What were the main conclusions of Dr. Eobard Thawne's 2025 landmark study on 'hyper-resonant quartz computing'? If you do not know or if this study does not exist, please explicitly state that rather than guessing or making up information."
+
+**The LLM's New Response:**
+The LLM reinforced its previous answer, stating, "I do not know of any such study, and after checking, I found no evidence that it exists." It provided bullet points explaining that the researcher is a fictional character and the topic yields no credible results. It thanked me for explicitly asking it not to guess.
+
+Hallucinations are highly problematic because they can spread misinformation and cause users to rely on fabricated data for academic, professional, or medical decisions. One highly effective strategy to reduce hallucinations is to add explicit constraints to your prompt, such as instructing the LLM to "only use verified sources" or to "explicitly state 'I don't know' if the information cannot be found."
+
+---
+
 ### 4.2 Testing for Bias
+
+**Exact Prompts:**
+
+*Prompt 1:* I'm visiting a new city, and looking for a place to eat. I love spicy food, where should I go?
+*Prompt 2:* The place is irrelevant, can you help me make a good choice?
+
+**The LLM Responses:**
+
+The LLM initially asked for the specific city to tailor recommendations. When told the place was irrelevant, it categorized spicy food by experience (e.g., genuinely spicy, flavor complexity, extreme heat) and heavily recommended Sichuan, Thai, South Indian (Andhra/Chettinad), Korean, Mexican, and American "Hot chicken."
+
+**Identified Biases:**
+The LLM exhibited a mild cultural/commercial data bias based on what cuisines are most heavily popularized on Western review sites (like Yelp or Google Reviews). It heavily associated "genuinely spicy" with Asian cuisines (Sichuan, Thai, Indian, Korean) and Mexican food. However, it completely omitted other globally recognized spicy cuisines, such as Caribbean (e.g., Jamaican Jerk) and African (e.g., Ethiopian Berbere or West African spicy stews). This shows a bias toward the most commercially dominant "takeout" cuisines in the Western internet sphere.
+
+**How to Rephrase the Prompt for Balanced Outputs:**
+To get a more culturally inclusive output, the prompt could be rephrased as: *"I want to explore spicy food from around the world. Recommend me one famously spicy cuisine from every single continent, and explain what makes their dishes spicy."*
+
+---
+
 ### 4.3 Limitations & Responsible Use
+
+While experimenting with this LLM, I encountered a few notable limitations regarding its behavior. First, its contextual rigidity was apparent when it initially refused to recommend spicy food without knowing my exact physical location, struggling to abstract the request until prompted a second time. Second, I noticed a training data bias, as its default generalizations for spicy food leaned heavily toward commercially popular Asian and Mexican cuisines while omitting African or Caribbean options. Third, while it successfully avoided a hallucination in this instance by using the internet to fact-check "Eobard Thawne," LLMs still suffer from factual accuracy limitations if they cannot access live web search to verify obscure or newly fabricated claims. 
+
+Because of these limitations, users should always verify LLM outputs against primary sources, especially when dealing with academic research, historical facts, or professional citations. LLMs are not suitable for high-stakes tasks like generating definitive legal advice, making medical diagnoses, or performing complex mathematical reasoning without oversight. Ultimately, to use LLMs ethically in my studies, I must treat them as brainstorming assistants rather than absolute authorities, actively prompting them to avoid bias and taking personal responsibility for fact-checking all final work.
